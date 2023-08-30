@@ -11,10 +11,7 @@ device_provider = Gst.DeviceProviderFactory.get_by_name("v4l2deviceprovider")
 devices = device_provider.get_devices()
 
 def getcapval(caps):
-    allval = []
-    for cap in caps:
-        allval.append(cap['value'])
-    return allval
+    return [cap['value'] for cap in caps]
 
 retDevices = []
 
@@ -24,13 +21,38 @@ for device in devices:
     caps = []
 
     if "mmal service" in name:
-        caps = []
-        caps.append({'value': "1920x1080", 'text': "1920x1080", 'height': 1080, 'width': 1920, 'format': 'raspivid'})
-        caps.append({'value': "1640x922", 'text': "1640x922", 'height': 922, 'width': 1640, 'format': 'raspivid'})
-        caps.append({'value': "1280x720", 'text': "1280x720", 'height': 720, 'width': 1280, 'format': 'raspivid'})
-        caps.append({'value': "640x480", 'text': "640x480", 'height': 480, 'width': 640, 'format': 'raspivid'})
+        caps = [
+            {
+                'value': "1920x1080",
+                'text': "1920x1080",
+                'height': 1080,
+                'width': 1920,
+                'format': 'raspivid',
+            },
+            {
+                'value': "1640x922",
+                'text': "1640x922",
+                'height': 922,
+                'width': 1640,
+                'format': 'raspivid',
+            },
+            {
+                'value': "1280x720",
+                'text': "1280x720",
+                'height': 720,
+                'width': 1280,
+                'format': 'raspivid',
+            },
+            {
+                'value': "640x480",
+                'text': "640x480",
+                'height': 480,
+                'width': 640,
+                'format': 'raspivid',
+            },
+        ]
         name = "Raspberry Pi Camera (V2)"
-        # path = "raspivid"
+            # path = "raspivid"
     elif "bcm2835-isp" in name:
         continue
     else:
